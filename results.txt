@@ -1,0 +1,13 @@
+
+Mean Observed Outcome: 47.71472
+Mean Counterfactual Outcome (Treatment = 1): 47.28386
+Mean Counterfactual Outcome (Treatment = 0): 48.18148
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)
+(Intercept)   50.6319    22.9001  2.2110   0.0000
+treatment     -0.8976    15.6280 -0.0574   0.0000
+covariate     -0.4847     4.0098 -0.1209   0.0000
+
+Residual standard error: 246.6979 on 997 degrees of freedom
+Multiple R-squared: -352.382497, Adjusted R-squared: -353.445835
+F-statistic: -0.9972 on 2 and 997 DF,  p-value: 1.00000

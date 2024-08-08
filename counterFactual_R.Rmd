@@ -1,0 +1,202 @@
+---
+title: "MSDS_431_Week_8"
+output: html_document
+date: "2024-08-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r seeds}
+# Install necessary packages
+if (!require("profvis")) install.packages("profvis")
+if (!require("ggplot2")) install.packages("ggplot2")
+if (!require("reshape2")) install.packages("reshape2")
+if (!require("pryr")) install.packages("pryr")
+
+# Load necessary libraries
+library(profvis)
+library(ggplot2)
+library(reshape2)
+library(pryr)
+
+# Memory Profile the entire script
+profvis({
+  # Example data
+  data <- read.csv("data.csv")
+  
+  # Print the first few rows of the dataset
+  head(data)
+  
+  # Check the structure of the data
+  str(data)
+  
+  # Memory usage before model fitting
+  mem_before_model <- mem_used()
+  cat("Memory used before model fitting:", mem_before_model, "\n")
+  
+  # Fit a linear model
+  model <- lm(outcome ~ treatment + covariate, data = data)
+  
+  # Print model summary
+  summary(model)
+  
+  # Memory usage after model fitting
+  mem_after_model <- mem_used()
+  cat("Memory used after model fitting:", mem_after_model, "\n")
+  
+  # Define a function to predict outcomes for counterfactual scenarios
+  predict_counterfactuals <- function(model, data, new_treatment) {
+    data_copy <- data
+    data_copy$treatment <- new_treatment
+    predictions <- predict(model, newdata = data_copy)
+    # Check the structure and type of predictions
+    cat("Predictions type:", typeof(predictions), "\n")
+    cat("Predictions length:", length(predictions), "\n")
+    return(predictions)
+  }
+  
+  # Estimate counterfactual outcomes
+  counterfactual_treatment_1 <- predict_counterfactuals(model, data, new_treatment = 1)
+  counterfactual_treatment_0 <- predict_counterfactuals(model, data, new_treatment = 0)
+  
+  # Debugging: Check the lengths of the predictions
+  cat("Length of counterfactual_treatment_1:", length(counterfactual_treatment_1), "\n")
+  cat("Length of counterfactual_treatment_0:", length(counterfactual_treatment_0), "\n")
+  cat("Number of rows in original data:", nrow(data), "\n")
+  
+  # Check the structure of the data before adding predictions
+  cat("Structure of data before adding predictions:\n")
+  str(data)
+
+  # Ensure the predictions have the same length as the original data
+  if (length(counterfactual_treatment_1) == nrow(data) && length(counterfactual_treatment_0) == nrow(data)) {
+    # Add counterfactuals to the original data
+    data$cf_treatment_1 <- counterfactual_treatment_1
+    data$cf_treatment_0 <- counterfactual_treatment_0
+  } else {
+    stop("Mismatch in the number of rows between the original data and the counterfactual predictions.")
+  }
+  
+  # Check the structure of the data after adding predictions
+  cat("Structure of data after adding predictions:\n")
+  str(data)
+  
+  # Memory usage after adding predictions
+  mem_after_predictions <- mem_used()
+  cat("Memory used after adding predictions:", mem_after_predictions, "\n")
+  
+  # Calculate means
+  mean_observed <- mean(data$outcome)
+  mean_cf_treatment_1 <- mean(as.numeric(data$cf_treatment_1))
+  mean_cf_treatment_0 <- mean(as.numeric(data$cf_treatment_0))
+  
+  # Print results
+  cat("Mean Observed Outcome:", mean_observed, "\n")
+  cat("Mean Counterfactual Outcome (Treatment = 1):", mean_cf_treatment_1, "\n")
+  cat("Mean Counterfactual Outcome (Treatment = 0):", mean_cf_treatment_0, "\n")
+  
+
+library(ggplot2)
+library(reshape2)
+
+# Create a data frame for plotting
+plot_data <- data.frame(
+  id = 1:nrow(data),  # Create an ID column if it doesn't exist
+  observed = data$outcome,
+  cf_treatment_1 = as.numeric(data$cf_treatment_1),
+  cf_treatment_0 = as.numeric(data$cf_treatment_0)
+)
+
+# Melt data for ggplot
+plot_data_melt <- melt(plot_data, id.vars = "id")
+
+# Plotting
+ggplot(plot_data_melt, aes(x = id, y = value, color = variable)) +
+  geom_line() +
+  labs(title = "Observed and Counterfactual Outcomes",
+       x = "ID",
+       y = "Outcome",
+       color = "Legend") +
+  theme_minimal()
+
+})
+
+
+
+```
+```{r plot}
+# Install necessary packages if not already installed
+if (!require("ggplot2")) install.packages("ggplot2")
+if (!require("reshape2")) install.packages("reshape2")
+
+# Load necessary libraries
+library(ggplot2)
+library(reshape2)
+
+# Read example data
+data <- read.csv("data.csv")
+
+# Print the first few rows of the dataset
+head(data)
+
+# Check the structure of the data
+str(data)
+
+# Fit a linear model
+model <- lm(outcome ~ treatment + covariate, data = data)
+
+# Print model summary
+summary(model)
+
+# Define a function to predict outcomes for counterfactual scenarios
+predict_counterfactuals <- function(model, data, new_treatment) {
+  data_copy <- data
+  data_copy$treatment <- new_treatment
+  predictions <- predict(model, newdata = data_copy)
+  return(predictions)
+}
+
+# Estimate counterfactual outcomes
+counterfactual_treatment_1 <- predict_counterfactuals(model, data, new_treatment = 1)
+counterfactual_treatment_0 <- predict_counterfactuals(model, data, new_treatment = 0)
+
+# Add counterfactuals to the original data
+data$cf_treatment_1 <- counterfactual_treatment_1
+data$cf_treatment_0 <- counterfactual_treatment_0
+
+# Calculate means
+mean_observed <- mean(data$outcome)
+mean_cf_treatment_1 <- mean(as.numeric(data$cf_treatment_1))
+mean_cf_treatment_0 <- mean(as.numeric(data$cf_treatment_0))
+
+# Print results
+cat("Mean Observed Outcome:", mean_observed, "\n")
+cat("Mean Counterfactual Outcome (Treatment = 1):", mean_cf_treatment_1, "\n")
+cat("Mean Counterfactual Outcome (Treatment = 0):", mean_cf_treatment_0, "\n")
+
+# Create a data frame for plotting
+plot_data <- data.frame(
+  id = 1:nrow(data),  # Create an ID column if it doesn't exist
+  observed = data$outcome,
+  cf_treatment_1 = as.numeric(data$cf_treatment_1),
+  cf_treatment_0 = as.numeric(data$cf_treatment_0)
+)
+
+# Melt data for ggplot
+plot_data_melt <- melt(plot_data, id.vars = "id")
+
+# Plot
+ggplot(plot_data_melt, aes(x = id, y = value, color = variable)) +
+  geom_line() +
+  labs(title = "Observed and Counterfactual Outcomes",
+       x = "ID",
+       y = "Outcome",
+       color = "Legend") +
+  theme_minimal()
+
+
+
+```
+

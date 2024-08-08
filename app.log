@@ -1,0 +1,35 @@
+2024/08/07 07:48:17 Starting application
+2024/08/07 07:48:17 Application finished
+2024/08/07 07:54:55 Starting application
+2024/08/07 07:54:55 Application finished
+2024/08/07 07:58:14 Starting application
+2024/08/07 07:58:14 Application finished
+2024/08/07 20:31:39 Starting application
+2024/08/07 20:31:39 Application finished
+2024/08/07 20:32:36 Starting application
+2024/08/07 20:32:36 Initial memory usage: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/07 20:32:36 Memory usage after reading CSV: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 7 MiB, NumGC = 0
+2024/08/07 20:32:36 Memory usage after parsing CSV: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 7 MiB, NumGC = 0
+2024/08/07 20:32:36 Memory usage after fitting model: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 7 MiB, NumGC = 0
+2024/08/07 20:32:36 Application finished
+2024/08/07 20:35:45 Starting application
+2024/08/07 20:35:45 Initial memory usage: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/07 20:35:45 Memory usage after reading CSV: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/07 20:35:45 Memory usage after parsing CSV: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/07 20:35:45 Memory usage after fitting model: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/07 20:35:45 Application finished
+2024/08/07 20:35:45 Final memory usage: Alloc = 1 MiB, TotalAlloc = 1 MiB, Sys = 7 MiB, NumGC = 0
+2024/08/07 20:37:27 Starting application
+2024/08/07 20:37:27 Initial memory usage: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/07 20:37:27 Memory usage after reading CSV: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/07 20:37:27 Memory usage after parsing CSV: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/07 20:37:27 Memory usage after fitting model: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/07 20:37:27 Application finished
+2024/08/07 20:37:27 Final memory usage: Alloc = 1 MiB, TotalAlloc = 1 MiB, Sys = 8 MiB, NumGC = 0
+2024/08/08 14:31:36 Starting application
+2024/08/08 14:31:36 Initial memory usage: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/08 14:31:36 Memory usage after reading CSV: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/08 14:31:36 Memory usage after parsing CSV: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/08 14:31:36 Memory usage after fitting model: Alloc = 0 MiB, TotalAlloc = 0 MiB, Sys = 6 MiB, NumGC = 0
+2024/08/08 14:31:36 Application finished
+2024/08/08 14:31:36 Final memory usage: Alloc = 1 MiB, TotalAlloc = 1 MiB, Sys = 7 MiB, NumGC = 0
